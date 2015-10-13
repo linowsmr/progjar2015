@@ -5,7 +5,7 @@ import time
 import string
 
 def chat_client():
-	host = '127.0.0.1'
+	host = 'localhost'
 
 	sys.stdout.write('Port : ')
 	port = int(sys.stdin.readline())
@@ -21,7 +21,7 @@ def chat_client():
 		sys.exit()
 
 	print 'Client sudah terhubung'
-	sys.stdout.write('>> '); sys.stdout.flush()
+	sys.stdout.write('Pesan: '); sys.stdout.flush()
 
 	while 1:
 		socket_list = [sys.stdin, s]
@@ -38,41 +38,42 @@ def chat_client():
 				else :
 					#print data
 					sys.stdout.write(data)
-					sys.stdout.write('>> '); sys.stdout.flush()
+					sys.stdout.write('Pesan: '); sys.stdout.flush()
 			else :
 				# user entered a message
 				msg = []
 				temp = sys.stdin.readline()
 				temp1 = string.split(temp[:-1])
 				
-				d=len(temp1)
+				#menghitung jumlah input
+				kata=len(temp1)
 				if temp1[0]=="login" :
-					if d>2:
+					if kata>2:
 						print('Username hanya satu kata saja')
-					elif d<2:
+					elif kata<2:
 						print('Masukkan username untuk login')
 					else:
 						s.send(temp)
 
 				elif temp1[0]=="send" :
-					if d<3:
+					if kata<3:
 						print('Perintah salah')
 					else:
 						s.send(temp)
 			
 				elif temp1[0]=="sendall" :
-					if d<2:
+					if kata<2:
 						print("Perintah salah")
 					else:
 						s.send(temp)
 		
 				elif temp1[0]=="list" :
-					if d>1:
+					if kata>1:
 						print('Lakukan login terlebih dulu')
 					else:
 						s.send(temp)
 				else:
 					print ('Perintah salah')
 					
-				sys.stdout.write('>> '); sys.stdout.flush()
+				sys.stdout.write('Pesan: '); sys.stdout.flush()
 chat_client()
