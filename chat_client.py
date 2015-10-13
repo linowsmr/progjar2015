@@ -5,17 +5,15 @@ import time
 import string
 
 def chat_client():
-	host = 'localhost'
-
-	sys.stdout.write('Port : ')
-	port = int(sys.stdin.readline())
+	server_address = ('localhost', 2812)
+	
 
 	# create TCP/IP socket
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	# connect to remote host
 	try :
-		s.connect((host, port))
+		s.connect(server_address)
 	except :
 		print 'Gagal'
 		sys.exit()
