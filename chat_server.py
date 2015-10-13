@@ -3,30 +3,29 @@ import socket
 import select
 import string
 
-HOST = 'localhost'
+#HOST = 'localhost'
 SOCKET_LIST = []
 NAME_LIST = []
 RECV_BUFFER = 4096
-PORT = 1
+#PORT = 1
 
 def chat_server():
 
-	sys.stdout.write('Port : ')
-	PORT = int(sys.stdin.readline())
-
+	server_address = ('localhost', 2812)
+	
 	#creating TCP/IP socket
 	server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 	# binding the socket
-	server_socket.bind((HOST, PORT))
+	server_socket.bind(server_address)
 	server_socket.listen(10)
 
 	# add server socket object to the list of readable connections
 	SOCKET_LIST.append(server_socket)
 
-	print "Chat server dimulai dengan port " + str(PORT)
-	
+	print >>sys.stderr, 'starting up on %s port %s' % server_address
+
 	while True:
 		# get the list sockets which are ready to be read through select
 		# 4th arg, time_out = 0 : poll and never block
