@@ -69,7 +69,7 @@ def chat_client():
 		
 				elif temp1[0]=="list" :
 					if kata>1:
-						print('Lakukan login terlebih dulu')
+						print('Perintah salah')
 					else:
 						s.send(temp)
 				else:
