@@ -30,6 +30,8 @@ class MemprosesClient(threading.Thread):
 				if(data[5: -22] == 'foto3'):
 					self.client_socket.send(get_file('gambar3.jpg'))
 					break
+				else:
+					self.client_socket.send(get_file('index.html'))	
 			else:
 				break
 		self.client_socket.close()
@@ -37,7 +39,7 @@ class MemprosesClient(threading.Thread):
 class Server(threading.Thread):
 	def __init__(self):
 		self.my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.server_address = ('localhost',9989)
+		self.server_address = ('localhost',9987)
 		self.my_socket.bind(self.server_address)
 		threading.Thread.__init__(self)
 	
